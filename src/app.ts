@@ -19,8 +19,9 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 
 connectToDB();
-startCronJobs();
-
+//startCronJobs();
+fetchNewsArticles();
+//sendAllNotifications();
 app.use('/api', routes);
 
 

@@ -13,4 +13,9 @@ export class NewsService {
   async fetchAllArticles(from: string, to: string) {
     return newsRepo.getAllArticles(from, to);
   }
+
+  async fetchUserPreferenceArticles(userId:string)
+  {
+    return newsRepo.getPersonalizedArticles(userId);
+  }
 }

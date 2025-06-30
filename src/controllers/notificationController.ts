@@ -6,7 +6,6 @@ const notificationService = new NotificationService();
 export class NotificationController {
   async getNotifications(req: Request, res: Response) {
     try {
-      console.log("router of notifications",req.params.userId)
       const data = await notificationService.getUserNotifications(req.params.userId);
       res.status(200).json(data);
     } catch (err) {
@@ -26,7 +25,6 @@ export class NotificationController {
   async getKeywords(req: Request, res: Response) {
     try {
       const data = await notificationService.getUserKeywords(req.params.userId);
-      console.log(data);
       res.status(200).json(data);
     } catch (err) {
       res.status(500).json({ message: 'Error fetching keywords' });

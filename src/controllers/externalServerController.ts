@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ExternalServerService } from '../services/externalServerService';
 import { ExternalServerInput } from '../models/ExternalServerInput.model';
+import axios from 'axios';
 
 const serverService = new ExternalServerService();
 
@@ -62,4 +63,28 @@ export class ExternalServerController {
       res.status(500).json({ message: 'Failed to add server.' });
     }
   }
+
+  async addCategory(req: Request,res: Response){
+    try{
+      const category:string = req.body.parameters;
+      const response = await serverService.addCategory(category);
+      console.log("res",response);
+      res.status(201).json({message:response});
+
+    }catch(error)
+    {
+      console.log("error",error);
+    }
+  }
+
+  async getAllCategories(req: Request,res:Response)
+  {
+    try{
+      return await serverService.getAllCategories();
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+  
 }

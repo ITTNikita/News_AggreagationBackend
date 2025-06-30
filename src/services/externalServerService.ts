@@ -3,22 +3,29 @@ import { ExternalServerRepository } from '../repositories/externalServerReposito
 const serverRepo = new ExternalServerRepository();
 
 export class ExternalServerService {
-  getServerStatus() {
+  async getServerStatus() {
     return serverRepo.fetchStatus();
   }
 
-  getActiveServerDetails() {
+  async getActiveServerDetails() {
     return serverRepo.fetchDetails();
   }
 
-  updateApiKey(id: number, api_key: string) {
+  async updateApiKey(id: number, api_key: string) {
     return serverRepo.updateApiKey(id, api_key);
   }
 
-  addServer(server: ExternalServerInput) {
-    console.log("testing server adding", server);
-    const jinhjihn = serverRepo.addServer(server);
-    console.log(jinhjihn);
-    return jinhjihn;
+  async addServer(server: ExternalServerInput) {     
+    return  serverRepo.addServer(server);
+  }
+
+  async addCategory(category:string)
+  {   
+    return serverRepo.addCategory(category);
+  }
+
+  async getAllCategories()
+  {
+    return serverRepo.getAllCategories();
   }
 }

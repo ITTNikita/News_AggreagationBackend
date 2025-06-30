@@ -7,7 +7,7 @@ export class ExternalServerRepository {
     return new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
         if (err) return reject(err);
-      resolve(results as any[]);
+        resolve(results as any[]);
       });
     });
   }
@@ -17,7 +17,7 @@ export class ExternalServerRepository {
     return new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
         if (err) return reject(err);
-      resolve(results as any[]);
+        resolve(results as any[]);
       });
     });
   }
@@ -32,34 +32,72 @@ export class ExternalServerRepository {
     });
   }
 
-addServer(server: ExternalServerInput): Promise<void> {
-  const query = `
-    INSERT INTO externalServer (
-      name, api_url, api_key, is_active, last_accessed,
-      article_id, title, description, source_name, url, category, dataKey
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-  `;
+  addServer(server: ExternalServerInput): Promise<void> {
+    const query = `
+      INSERT INTO externalServer (
+        name, api_url, api_key, is_active, last_accessed,
+        article_id, title, description, source_name, url, category, dataKey, content
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);
+    `;
 
-  return new Promise((resolve, reject) => {
-    db.query(query, [
-      server.name,
-      server.apiurl,
-      server.key,
-      server.isActive,
-      new Date(), 
-      server.article_id,
-      server.title,
-      server.description,
-      server.source_name,
-      server.url,
-      server.category,
-      server.dataKey
-    ], (err) => {
-      if (err) return reject(err);
-      resolve();
+    return new Promise((resolve, reject) => {
+      db.query(query, [
+        server.name,
+        server.apiurl,
+        server.key,
+        server.isActive,
+        new Date(), 
+        server.article_id,
+        server.title,
+        server.description,
+        server.source_name,
+        server.url,
+        server.category,
+        server.content,
+        server.dataKey
+      ], (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
     });
-  });
+  }
+
+  categoryExists(category: string): Promise<boolean> {
+    const checkQuery = `SELECT COUNT(*) AS count FROM category WHERE category = ?`;
+
+    return new Promise((resolve, reject) => {
+      db.query(checkQuery, [category], (err, results) => {
+        if (err) return reject(err);
+
+        const typedResults = results as { count: number }[]; 
+        resolve(typedResults[0].count > 0);
+      });
+    });
+  }
+
+  async addCategory(category: string): Promise<string> {
+    const exists = await this.categoryExists(category);
+    if (exists) {
+       return "Category already exists";
+    }
+    const insertQuery = `INSERT INTO category (category) VALUES (?)`;
+    return new Promise((resolve, reject) => {
+      db.query(insertQuery, [category], (err) => {
+        if (err) return reject(err);
+        resolve("Category added successfully");
+      });
+    });
+  }
+
+  getAllCategories(): Promise<any> {    
+    const selectQuery = `select * from category`;
+    return new Promise((resolve, reject) => {
+      db.query(selectQuery, (err,result) => {
+        if (err) return reject(err);
+        resolve(result as any);
+      });
+      });
+  }
 }
 
 
-}

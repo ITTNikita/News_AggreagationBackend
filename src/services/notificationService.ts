@@ -26,5 +26,4 @@ export class NotificationService {
       return false;
     }
   }
-
 }

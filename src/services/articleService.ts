@@ -2,7 +2,7 @@ import { ArticleRepository } from '../repositories/articleRepository';
 const savedRepo = new ArticleRepository();
 
 export class ArticleService {
-  getSavedArticles(userId: string) {
+  async getSavedArticles(userId: string) {
     return savedRepo.getByUser(userId);
   }
 
@@ -12,7 +12,7 @@ export class ArticleService {
     return savedRepo.insert(article);
   }
 
-  deleteArticle(userId: string, articleId: string) {
+  async deleteArticle(userId: string, articleId: string) {
     return savedRepo.remove(userId, articleId);
   }
 }

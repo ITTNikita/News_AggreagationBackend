@@ -8,7 +8,6 @@ export class ArticleController {
     try {
       const userId = req.query.userId as string;
       const articles = await savedService.getSavedArticles(userId);
-
       const formattedResults = (articles as any[]).map((row, index) => ({
       id: index + 1,
       article_id: row.article_id,
@@ -24,8 +23,7 @@ export class ArticleController {
         hour: '2-digit',
         minute: '2-digit',
       }),
-    }));
-    
+    }));    
       res.status(200).json(formattedResults);
     } catch (err) {
       res.status(500).json({ message: 'Failed to fetch saved articles' });
@@ -49,9 +47,9 @@ export class ArticleController {
     try {
       const { userId, articleId } = req.params;
       await savedService.deleteArticle(userId, articleId);
-      res.status(200).json({ message: ' Article deleted successfully.' });
+      res.status(200).json({ message: ' Article deleted successfully.'});
     } catch (err) {
-      res.status(500).json({ message: 'Failed to delete article.' });
+      res.status(500).json({ message: 'Failed to delete article.'});
     }
   }
 }

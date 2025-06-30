@@ -34,7 +34,7 @@ export async function sendAllNotifications() {
               let apiUrl = server.api_url;
               const apiKey = server.api_key;
               apiUrl = `${apiUrl}?q=${category}&${apiKey}`;
-              console.log(apiUrl);
+              
 
               try {
                 const res = await axios.get(apiUrl);

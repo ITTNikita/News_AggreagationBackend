@@ -14,6 +14,22 @@ export class NewsController {
     }
   }
 
+  async getUserPreferenceArticles(req: Request, res: Response) {
+    try {
+      console.log('Fetching user preference\'s articles');
+      const userId  = req.query.id;
+      if (typeof userId !== 'string') {
+        res.status(400).json({ message: 'Invalid or missing userId' });
+         return
+      }
+      console.log("user id in user preference function backend side", userId);
+      const articles = await newsService.fetchUserPreferenceArticles(userId);
+      res.status(200).json(articles);
+    } catch (err) {
+      res.status(500).json({ message: 'Failed to fetch today\'s articles' });
+    }
+  }
+
   async getArticlesByFilter(req: Request, res: Response) {
     try {
       const { from, to, category } = req.query;

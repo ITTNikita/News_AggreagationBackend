@@ -3,7 +3,7 @@ import { db } from '../config/db';
 export class NotificationRepository {
   getUserNotifications(userId: string): Promise<any[]> {
     const query = `
-       SELECT DISTINCT n.id, n.message, n.timestamp
+    SELECT DISTINCT n.id, n.message, n.timestamp
     FROM notifications n     
     WHERE n.user_id = ?      
     ORDER BY n.timestamp DESC
@@ -42,7 +42,6 @@ export class NotificationRepository {
 
  
 async getUserKeywords(userId: string): Promise<any[]> {
-  console.log("routes",userId)
   const query = `SELECT keyword, is_enabled FROM user_keywords WHERE user_id = ?`;
   return new Promise((resolve, reject) => {
     db.query(query, [userId], (err, results) => {
@@ -58,7 +57,6 @@ async getUserKeywords(userId: string): Promise<any[]> {
 
 
 async addKeyword(userId: string, keyword: string): Promise<void> {
-
   const query = `INSERT INTO user_keywords (user_id, keyword, is_enabled)
                  VALUES (?, ?, 1)
                  ON DUPLICATE KEY UPDATE is_enabled = 1`;
@@ -67,7 +65,6 @@ async addKeyword(userId: string, keyword: string): Promise<void> {
 
 async updateKeywordStatus(userId: string, keyword: string, isEnabled: boolean): Promise<boolean> {
   const query = `UPDATE user_keywords SET is_enabled = ? WHERE user_id = ? AND keyword = ?`;
-
   return new Promise((resolve, reject) => {
     db.query(query, [isEnabled, userId, keyword], (err, result) => {
       if (err) {

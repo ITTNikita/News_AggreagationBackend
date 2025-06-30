@@ -8,6 +8,7 @@ export interface ExternalServerInput {
   source_name:string,
   url:string,
   category:string,
+  content:string,
   dataKey:string,
   isActive: number;
 }
