@@ -43,7 +43,6 @@ export class NewsController {
     try {
       const { from, to } = req.query;
       const articles = await this.newsService.fetchAllArticles(from as string, to as string);
-      console.log("All articles fetched", articles);
       res.status(200).json(articles);
     } catch (err) {
       res.status(500).json({ error: 'Failed to fetch all articles' });

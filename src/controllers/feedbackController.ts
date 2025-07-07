@@ -23,7 +23,7 @@ export class FeedBackController {
   async reportArticle(req: Request,res: Response)
   {
     try{
-    const {userId,articleId}= req.body.params; 
+    const {userId,articleId}= req.body; 
     if(!userId || !articleId)
     {
       res.status(400).json({ message: 'there is some error in userId or article id' });

@@ -1,8 +1,6 @@
 import { ArticleRepository } from '../repositories/articleRepository';
-// const savedRepo = new ArticleRepository();
 
 export class ArticleService {
-
   constructor(private savedRepo = new ArticleRepository()) {}
   async getSavedArticles(userId: string) {
     return this.savedRepo.getByUser(userId);

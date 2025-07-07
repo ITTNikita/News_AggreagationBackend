@@ -2,13 +2,11 @@ import { db } from '../config/db';
 
 export class NewsRepository {
   getTodayArticles(): Promise<any[]> {
-    console.log("Fetching today's articles...");
     const query = `SELECT * FROM articles WHERE DATE(created_at) = CURDATE() and is_hidden = 0`;
     return new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
         if (err) return reject(err);
         resolve(results as any[]);
-         console.log('resulyts', results);
       });
      
     });

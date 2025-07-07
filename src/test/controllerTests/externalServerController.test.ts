@@ -25,7 +25,7 @@ describe('ExternalServerController', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    controller = new ExternalServerController(mockServiceInstance as any); // ✅ Inject mock here
+    controller = new ExternalServerController(mockServiceInstance as any);
   });
 
   it('should return formatted server status', async () => {
@@ -34,7 +34,7 @@ describe('ExternalServerController', () => {
       day: '2-digit',
       month: 'short',
       year: 'numeric'
-    }); // This will result in "01 Jan 2023"
+    });
 
     mockServiceInstance.getServerStatus.mockResolvedValue([
       { name: 'NewsAPI', is_active: 1, last_accessed: inputDate }

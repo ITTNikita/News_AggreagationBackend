@@ -11,7 +11,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    service = new UserService(mockRepoInstance as any); // Injecting the mock repo
+    service = new UserService(mockRepoInstance as any);
   });
 
   it('should find user by email', async () => {

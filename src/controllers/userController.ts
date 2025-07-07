@@ -6,7 +6,7 @@ import { isValidEmail } from '../utils/validators';
 
 export class UserController {
 
-  constructor(public userService = new UserService()) {}
+  constructor(private  userService = new UserService()) {}
   async signup(req: Request, res: Response): Promise<void> {   
     const { userName, userEmail, password } = req.body;
     if (!userName || !userEmail || !password) {

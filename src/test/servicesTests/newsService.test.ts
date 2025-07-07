@@ -4,7 +4,6 @@ import { NewsRepository } from '../../repositories/newsRepository';
 jest.mock('../../repositories/newsRepository');
 const MockRepo = NewsRepository as jest.MockedClass<typeof NewsRepository>;
 
-// Mock repo methods
 const mockRepoInstance = {
   getTodayArticles: jest.fn(),
   getArticlesByCategory: jest.fn(),

@@ -19,11 +19,10 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 
 connectToDB();
-//startCronJobs();
-fetchNewsArticles();
+startCronJobs();
+// fetchNewsArticles();
 //sendAllNotifications();
 app.use('/api', routes);
-
 
 app.listen(PORT, () => {
   console.log(` Server is running on http://localhost:${PORT}`);
