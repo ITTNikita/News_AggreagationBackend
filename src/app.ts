@@ -21,10 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 
 connectToDB();
 logMessage('database connection established');
-// startCronJobs();
+startCronJobs();
 logMessage('Cron jobs started');
-fetchNewsArticles();
-sendAllNotifications();
+// fetchNewsArticles();
+// sendAllNotifications();
 app.use('/api', routes);
 logMessage('Routes initialized');
 
