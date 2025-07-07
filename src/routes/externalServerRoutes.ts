@@ -2,12 +2,12 @@ import { Router } from 'express';
 import { ExternalServerController } from '../controllers/externalServerController';
 
 const router = Router();
-const controller = new ExternalServerController();
+const externalServerController = new ExternalServerController();
 
-router.get('/status', controller.getStatus);
-router.get('/details', controller.getDetails);
-router.put('/:id', controller.updateApiKey);
-router.post('/', controller.addServer);
-router.post('/new-category',controller.addCategory);
+router.get('/status', externalServerController.getStatus.bind(externalServerController));
+router.get('/details', externalServerController.getDetails.bind(externalServerController));
+router.put('/:id', externalServerController.updateApiKey.bind(externalServerController));
+router.post('/', externalServerController.addServer.bind(externalServerController));
+router.post('/new-category',externalServerController.addCategory.bind(externalServerController));
 
 export default router;

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { AdminService } from '../services/adminServices';
 
 export class AdminController {
+  
   static async hideArticleGlobally(req: Request, res: Response) {
     const { articleId } = req.body;
     if (!articleId) {        

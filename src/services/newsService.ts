@@ -2,20 +2,21 @@ import { NewsRepository } from '../repositories/newsRepository';
 const newsRepo = new NewsRepository();
 
 export class NewsService {
+  constructor(private newsRepo = new NewsRepository()) {}
   async fetchTodayArticles() {
-    return newsRepo.getTodayArticles();
+    return this.newsRepo.getTodayArticles();
   }
 
   async fetchFilteredArticles(from: string, to: string, category: string) {
-    return newsRepo.getArticlesByCategory(from, to, category);
+    return this.newsRepo.getArticlesByCategory(from, to, category);
   }
 
   async fetchAllArticles(from: string, to: string) {
-    return newsRepo.getAllArticles(from, to);
+    return this.newsRepo.getAllArticles(from, to);
   }
 
   async fetchUserPreferenceArticles(userId:string)
   {
-    return newsRepo.getPersonalizedArticles(userId);
+    return this.newsRepo.getPersonalizedArticles(userId);
   }
 }

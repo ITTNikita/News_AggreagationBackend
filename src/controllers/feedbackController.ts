@@ -6,7 +6,7 @@ const feedbackService = new FeedbackService();
 export class FeedBackController {
    async setFeedback(req: Request, res: Response) {      
     try {      
-      const { userId, articleId, userChoice } = req.body.params;    
+      const { userId, articleId, userChoice } = req.body;
       if (userChoice !=='0' && userChoice !=='1') {
         res.status(400).json({ message: 'Value must be 0 (dislike) or 1 (like)' });
         return;

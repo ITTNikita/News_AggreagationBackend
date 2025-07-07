@@ -54,7 +54,7 @@ export class FeedbackRepository {
     });
   }
 
-  async reportArticle(articleId: string,userId:string): Promise<void>
+  async reportArticle(userId:string,articleId: string): Promise<void>
   {
     sendNotificationToAdmin(articleId,userId);
     console.log("sending email to admin regarding article reporting")

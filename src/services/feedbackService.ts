@@ -1,29 +1,28 @@
-
 import { FeedbackRepository } from "../repositories/feedbackRepository";
-const feedbackRepo = new FeedbackRepository();
- 
+
 export class FeedbackService {
+  constructor(private feedbackRepo: FeedbackRepository = new FeedbackRepository()) {}
+
   async saveOrUpdateFeedback(userId: string, articleId: string, userChoice: string) {
-    const feedback = await feedbackRepo.getFeedback(userId, articleId);
-  
+    const feedback = await this.feedbackRepo.getFeedback(userId, articleId);
+
     const update = {
       like: userChoice === '1' ? '1' : '0',
       dislike: userChoice === '0' ? '1' : '0',
     };
-    console.log(userId,articleId,update) 
+
     if (feedback) {
-      return await feedbackRepo.updateFeedback(userId, articleId, update);
+      return await this.feedbackRepo.updateFeedback(userId, articleId, update);
     } else {
-      return await feedbackRepo.insertFeedback(userId, articleId, update);
+      return await this.feedbackRepo.insertFeedback(userId, articleId, update);
     }
   }
-  async reportArticle(userId: string, articleId:string)
-  {
-    try{
-      return await feedbackRepo.reportArticle( articleId,userId);
-    }catch(error)
-    {
-      console.log("error",error)
+
+  async reportArticle(userId: string, articleId: string) {
+    try {
+      return await this.feedbackRepo.reportArticle(userId, articleId); 
+    } catch (error) {
+      console.error("Error reporting article:", error);
       return error;
     }
   }

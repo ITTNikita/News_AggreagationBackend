@@ -2,10 +2,10 @@ import { Router } from 'express';
 import { ArticleController } from '../controllers/articleController';
 
 const router = Router();
-const controller = new ArticleController();
+const articleController = new ArticleController();
 
-router.get('/', controller.getSavedArticles);
-router.post('/', controller.saveArticle);
-router.delete('/:userId/:articleId', controller.deleteArticle);
+router.get('/', articleController.getSavedArticles.bind(articleController));
+router.post('/', articleController.saveArticle.bind(articleController));
+router.delete('/:userId/:articleId', articleController.deleteArticle.bind(articleController));
 
 export default router;

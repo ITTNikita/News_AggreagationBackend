@@ -3,29 +3,30 @@ import { ExternalServerRepository } from '../repositories/externalServerReposito
 const serverRepo = new ExternalServerRepository();
 
 export class ExternalServerService {
+  constructor(private serverRepo = new ExternalServerRepository()) {}
   async getServerStatus() {
-    return serverRepo.fetchStatus();
+    return this.serverRepo.fetchStatus();
   }
 
   async getActiveServerDetails() {
-    return serverRepo.fetchDetails();
+    return this.serverRepo.fetchDetails();
   }
 
   async updateApiKey(id: number, api_key: string) {
-    return serverRepo.updateApiKey(id, api_key);
+    return this.serverRepo.updateApiKey(id, api_key);
   }
 
   async addServer(server: ExternalServerInput) {     
-    return  serverRepo.addServer(server);
+    return  this.serverRepo.addServer(server);
   }
 
   async addCategory(category:string)
   {   
-    return serverRepo.addCategory(category);
+    return this.serverRepo.addCategory(category);
   }
 
   async getAllCategories()
   {
-    return serverRepo.getAllCategories();
+    return this.serverRepo.getAllCategories();
   }
 }
