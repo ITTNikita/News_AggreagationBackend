@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
 import { isValidEmail } from '../utils/validators';
+import { logMessage } from '../../logs/logService';
+import { log } from 'console';
 
 
 
 export class UserController {
 
   constructor(private  userService = new UserService()) {}
-  async signup(req: Request, res: Response): Promise<void> {   
+  async signup(req: Request, res: Response): Promise<void> {  
+    logMessage('User signup request received'); 
     const { userName, userEmail, password } = req.body;
     if (!userName || !userEmail || !password) {
       res.status(400).json({ message: 'All fields are required' });
@@ -31,6 +34,7 @@ export class UserController {
   }
 
   async login(req: Request, res: Response): Promise<void> {
+    logMessage('User login request received');
     const { username, password} = req.body;
     try {
       const user = await this.userService.findUserByUserName(username);

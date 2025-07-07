@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { AdminService } from '../services/adminServices';
+import { logMessage } from '../../logs/logService';
 
 export class AdminController {
   
   static async hideArticleGlobally(req: Request, res: Response) {
+    logMessage('Admin request to hide article globally received');
     const { articleId } = req.body;
     if (!articleId) {        
         console.log( res.status(400).json({ message: 'Article ID is required.' }));
@@ -15,6 +17,7 @@ export class AdminController {
   }
 
   static async hideCategory(req: Request, res: Response) {
+    logMessage('Admin request to hide category received');
     const { categoryName } = req.body;
     if (!categoryName) 
     { 
@@ -27,6 +30,7 @@ export class AdminController {
   }
 
   static async filterArticlesByKeyword(req: Request, res: Response) {
+    logMessage('Admin request to filter articles by keyword received');
     const { keyword } = req.body;
     if (!keyword) { res.status(400).json({ message: 'Keyword is required.' }) ;return;}
     await AdminService.filterArticlesByKeyword(keyword);
